@@ -47,43 +47,24 @@ class ViewController: UIViewController {
         let heightConstraint = secondaryMenu.heightAnchor.constraintEqualToConstant(44)
         NSLayoutConstraint.activateConstraints([bottomConstraint,leftConstraint,rightConstraint,heightConstraint])
         view.layoutIfNeeded()
+        
+        self.secondaryMenu.alpha = 0
+        UIView.animateWithDuration(0.4){
+            self.secondaryMenu.alpha = 1.0
+        }
     }
     
     func hideSecondaryMenu() {
-        secondaryMenu.removeFromSuperview()
+        //secondaryMenu.removeFromSuperview()
+        UIView.animateWithDuration(0.4, animations: {
+            self.secondaryMenu.alpha = 0
+        }){ completed in
+            if completed == true {
+                self.secondaryMenu.removeFromSuperview()
+            }
+        }
     }
     
-    /*@IBAction func applyFilter(sender: AnyObject) {
-        var filterName = Filter.None
-        
-        switch filterState {
-        case .Hulk:
-            filterName = Filter.Hulkify
-            filterState = FilterStates.Smurf
-            //applyFilterBtn.titleLabel?.text = "SMURFify"
-            applyFilterBtn.setTitle("SMURFify", forState: UIControlState.Normal)
-        case .Smurf:
-            filterName = Filter.Smurfify
-            filterState = FilterStates.Red
-            //applyFilterBtn.titleLabel?.text = "REDify"
-            applyFilterBtn.setTitle("REDify", forState: UIControlState.Normal)
-        case .Red:
-            filterName = Filter.Redify
-            filterState = FilterStates.None
-            //applyFilterBtn.titleLabel?.text = "NONEify"
-            applyFilterBtn.setTitle("NONEify", forState: UIControlState.Normal)
-        case .None:
-            filterName = Filter.None
-            filterState = FilterStates.Hulk
-            //applyFilterBtn.titleLabel?.text = "HULKify"
-            applyFilterBtn.setTitle("HULKify", forState: UIControlState.Normal)
-            
-        }
-        
-        let newImage = ImageProcessor.applyFilter(image!, filterName: filterName, v: 0)
-        imageView.image = newImage
-        
-    }*/
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
