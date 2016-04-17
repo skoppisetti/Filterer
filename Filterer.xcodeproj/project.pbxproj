@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F901818E1CC403180096DCB7 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F901818D1CC403180096DCB7 /* TableViewController.swift */; };
 		F95950891CB1664E004A7099 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95950881CB1664E004A7099 /* AppDelegate.swift */; };
 		F959508B1CB1664E004A7099 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F959508A1CB1664E004A7099 /* ViewController.swift */; };
 		F959508E1CB1664F004A7099 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F959508C1CB1664F004A7099 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F901818D1CC403180096DCB7 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		F95950851CB1664C004A7099 /* Filterer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Filterer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F95950881CB1664E004A7099 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F959508A1CB1664E004A7099 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 			children = (
 				F95950881CB1664E004A7099 /* AppDelegate.swift */,
 				F959508A1CB1664E004A7099 /* ViewController.swift */,
+				F901818D1CC403180096DCB7 /* TableViewController.swift */,
 				F959509A1CB16B83004A7099 /* RGBAImage.swift */,
 				F959509E1CB16CF7004A7099 /* Common.swift */,
 				F959509F1CB16CF7004A7099 /* ImageProcessor.swift */,
@@ -146,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F95950A01CB16CF7004A7099 /* Common.swift in Sources */,
+				F901818E1CC403180096DCB7 /* TableViewController.swift in Sources */,
 				F959508B1CB1664E004A7099 /* ViewController.swift in Sources */,
 				F95950A11CB16CF7004A7099 /* ImageProcessor.swift in Sources */,
 				F959509B1CB16B83004A7099 /* RGBAImage.swift in Sources */,
@@ -305,6 +309,7 @@
 				F95950991CB1664F004A7099 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
