@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
     
@@ -17,8 +17,21 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var filterButton: UIButton!
     
-    let image = UIImage(named: "IMG_0974")
+    @IBOutlet weak var redBtn: UIButton!
+    @IBOutlet weak var greenBtn: UIButton!
+    @IBOutlet weak var blueBtn: UIButton!
+    @IBOutlet weak var yellowBtn: UIButton!
+    
+    
+    var image = UIImage(named: "IMG_0974")
+    var filteredImage : UIImage
+    
     var filterState = FilterStates.None
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.filteredImage = image!
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +42,53 @@ class ViewController: UIViewController {
     
     }
 
+    @IBAction func onShare(sender: AnyObject) {
+        let activityController = UIActivityViewController(activityItems: ["Checkout our really cool app", imageView.image!], applicationActivities: nil)
+        presentViewController(activityController,animated: true, completion: nil)
+    }
+    
+    @IBAction func onNewPhoto(sender: UIButton) {
+        let actionSheet = UIAlertController(title: "New Photo", message: nil, preferredStyle: .ActionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .Default, handler: {
+            action in self.showCamera()
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Album", style: .Default, handler: {
+            action in self.showAlbum()
+        }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Calcel", style: .Cancel, handler: nil))
+        
+        self.presentViewController(actionSheet, animated: true, completion: nil)
+    }
+    
+    func showCamera() {
+        let cameraPicker = UIImagePickerController()
+        cameraPicker.delegate = self
+        cameraPicker.sourceType = .Camera
+        presentViewController(cameraPicker, animated: true, completion: nil)
+    }
+    
+    func showAlbum() {
+        let cameraPicker = UIImagePickerController()
+        cameraPicker.delegate = self
+        cameraPicker.sourceType = .PhotoLibrary
+        presentViewController(cameraPicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        dismissViewControllerAnimated(true, completion: nil)
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            self.image = image
+            imageView.image = image
+        }
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func onFilter(sender: UIButton) {
         if(sender.selected){
             hideSecondaryMenu()
@@ -63,6 +123,26 @@ class ViewController: UIViewController {
                 self.secondaryMenu.removeFromSuperview()
             }
         }
+    }
+    
+    @IBAction func filterRed(sender: AnyObject) {
+        filteredImage = ImageProcessor.applyFilter(image!, filterName: Filter.Redify, v: 15)
+        imageView.image = filteredImage
+    }
+    
+    @IBAction func filterGreen(sender: AnyObject) {
+        filteredImage = ImageProcessor.applyFilter(image!, filterName: Filter.Hulkify, v: 15)
+        imageView.image = filteredImage
+    }
+
+    @IBAction func filterBlue(sender: AnyObject) {
+        filteredImage = ImageProcessor.applyFilter(image!, filterName: Filter.Smurfify, v: 15)
+        imageView.image = filteredImage
+    }
+
+    @IBAction func filterYellow(sender: AnyObject) {
+        filteredImage = ImageProcessor.applyFilter(image!, filterName: Filter.DoubleBright, v:10)
+        imageView.image = filteredImage
     }
     
     
