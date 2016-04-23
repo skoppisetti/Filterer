@@ -169,6 +169,7 @@
                     <connections>
                         <outlet property="blueBtn" destination="rp2-ws-T7b" id="j1c-cv-P4d"/>
                         <outlet property="bottomMenu" destination="P4b-dw-Dz1" id="NLt-T2-uoS"/>
+                        <outlet property="compareBtn" destination="9la-hX-1ec" id="8ke-tv-qAn"/>
                         <outlet property="filterButton" destination="ZKh-vv-7fE" id="oGe-SP-pxQ"/>
                         <outlet property="greenBtn" destination="pXo-pw-RRa" id="U1T-1W-f1b"/>
                         <outlet property="imageView" destination="4fY-pb-0ed" id="bGF-gl-1QD"/>

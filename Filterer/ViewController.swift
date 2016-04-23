@@ -21,12 +21,14 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var greenBtn: UIButton!
     @IBOutlet weak var blueBtn: UIButton!
     @IBOutlet weak var yellowBtn: UIButton!
+    @IBOutlet weak var compareBtn: UIButton!
     
     
     var image = UIImage(named: "IMG_0974")
     var filteredImage = UIImage()
     
     var filterState = FilterStates.None
+    var filterApplied = false
     
     required init?(coder aDecoder: NSCoder) {
         //self.filteredImage = image!
@@ -38,8 +40,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageView.image = image
         secondaryMenu.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
         secondaryMenu.translatesAutoresizingMaskIntoConstraints = false
+        compareBtn.enabled = false
         print("This code has executed")
-    
     }
 
     @IBAction func onShare(sender: AnyObject) {
@@ -128,21 +130,29 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBAction func filterRed(sender: AnyObject) {
         filteredImage = ImageProcessor.applyFilter(image!, filterName: Filter.Redify, v: 15)
         imageView.image = filteredImage
+        filterApplied = true
+        compareBtn.enabled = true
     }
     
     @IBAction func filterGreen(sender: AnyObject) {
         filteredImage = ImageProcessor.applyFilter(image!, filterName: Filter.Hulkify, v: 15)
         imageView.image = filteredImage
+        filterApplied = true
+        compareBtn.enabled = true
     }
 
     @IBAction func filterBlue(sender: AnyObject) {
         filteredImage = ImageProcessor.applyFilter(image!, filterName: Filter.Smurfify, v: 15)
         imageView.image = filteredImage
+        filterApplied = true
+        compareBtn.enabled = true
     }
 
     @IBAction func filterYellow(sender: AnyObject) {
         filteredImage = ImageProcessor.applyFilter(image!, filterName: Filter.DoubleBright, v:10)
         imageView.image = filteredImage
+        filterApplied = true
+        compareBtn.enabled = true
     }
     
     @IBAction func compareImage(sender: UIButton) {
