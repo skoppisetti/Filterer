@@ -24,12 +24,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     
     var image = UIImage(named: "IMG_0974")
-    var filteredImage : UIImage
+    var filteredImage = UIImage()
     
     var filterState = FilterStates.None
     
     required init?(coder aDecoder: NSCoder) {
-        self.filteredImage = image!
+        //self.filteredImage = image!
         super.init(coder: aDecoder)
     }
     
@@ -145,7 +145,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imageView.image = filteredImage
     }
     
-    
+    @IBAction func compareImage(sender: UIButton) {
+        if sender.selected {
+            imageView.image = filteredImage
+            sender.selected = false
+        } else {
+            imageView.image = image
+            sender.selected = true
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -65,6 +65,9 @@
                                                     <constraint firstAttribute="height" constant="44" id="Vkh-gc-oEU"/>
                                                 </constraints>
                                                 <state key="normal" title="Compare"/>
+                                                <connections>
+                                                    <action selector="compareImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YNg-Pk-AuC"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="txv-kX-tRD">
                                                 <rect key="frame" x="450" y="0.0" width="150" height="44"/>
