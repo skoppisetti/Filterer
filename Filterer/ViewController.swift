@@ -23,6 +23,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var yellowBtn: UIButton!
     @IBOutlet weak var compareBtn: UIButton!
     
+    @IBOutlet var watermarkView: UIView!
     
     var image = UIImage(named: "IMG_0974")
     var filteredImage = UIImage()
@@ -38,12 +39,17 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.image = image
+        
         secondaryMenu.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
         secondaryMenu.translatesAutoresizingMaskIntoConstraints = false
+        
+        watermarkView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
+        watermarkView.translatesAutoresizingMaskIntoConstraints = false
+        
         compareBtn.enabled = false
         print("This code has executed")
     }
-
+    
     @IBAction func onShare(sender: AnyObject) {
         let activityController = UIActivityViewController(activityItems: ["Checkout our really cool app", imageView.image!], applicationActivities: nil)
         presentViewController(activityController,animated: true, completion: nil)
@@ -127,6 +133,31 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         }
     }
     
+    func showWatermarkOverlay(){
+        view.addSubview(watermarkView)
+        let topConstraint  = watermarkView.topAnchor.constraintEqualToAnchor(view.topAnchor)
+        let leftConstraint  = watermarkView.leftAnchor.constraintEqualToAnchor(view.leftAnchor)
+        let rightConstraint = watermarkView.rightAnchor.constraintEqualToAnchor(view.rightAnchor)
+        let heightConstraint = watermarkView.heightAnchor.constraintEqualToConstant(50)
+        NSLayoutConstraint.activateConstraints([topConstraint,leftConstraint,rightConstraint,heightConstraint])
+        view.layoutIfNeeded()
+        
+        self.watermarkView.alpha = 0
+        UIView.animateWithDuration(0.4){
+            self.watermarkView.alpha = 1.0
+        }
+    }
+    
+    func hideWatermarkOverlay() {
+        UIView.animateWithDuration(0.4, animations: {
+            self.watermarkView.alpha = 0
+        }){ completed in
+            if completed == true {
+                self.watermarkView.removeFromSuperview()
+            }
+        }
+    }
+    
     @IBAction func filterRed(sender: AnyObject) {
         filteredImage = ImageProcessor.applyFilter(image!, filterName: Filter.Redify, v: 15)
         imageView.image = filteredImage
@@ -163,6 +194,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             imageView.image = image
             sender.selected = true
         }
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        imageView.image = image
+        showWatermarkOverlay()
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        imageView.image = filteredImage
+        hideWatermarkOverlay()
     }
 
     override func didReceiveMemoryWarning() {
