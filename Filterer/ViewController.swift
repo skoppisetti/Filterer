@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView2: UIImageView!
     
     @IBOutlet var secondaryMenu: UIView!
     @IBOutlet weak var bottomMenu: UIView!
@@ -101,6 +102,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         if(sender.selected){
             hideSecondaryMenu()
             sender.selected = false
+            compareBtn.enabled = false
         } else {
             showSecondaryMenu()
             sender.selected = true
@@ -123,7 +125,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func hideSecondaryMenu() {
-        //secondaryMenu.removeFromSuperview()
         UIView.animateWithDuration(0.4, animations: {
             self.secondaryMenu.alpha = 0
         }){ completed in
@@ -188,21 +189,47 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func compareImage(sender: UIButton) {
         if sender.selected {
-            imageView.image = filteredImage
+            UIView.animateWithDuration(0.4){
+                self.imageView.image = self.filteredImage
+                self.imageView2.alpha = 0
+                self.imageView.alpha = 1
+            }
+            hideWatermarkOverlay()
             sender.selected = false
         } else {
-            imageView.image = image
+            UIView.animateWithDuration(0.4){
+                self.imageView2.image = self.image
+                self.imageView2.alpha = 1
+                self.imageView.alpha = 0
+            }
+            showWatermarkOverlay()
             sender.selected = true
         }
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        imageView.image = image
+        UIView.animateWithDuration(0.4){
+            //self.imageView2.alpha = 1
+            self.imageView.alpha = 0
+        }
+        UIView.animateWithDuration(0.4){
+            self.imageView2.image = self.image
+            self.imageView2.alpha = 1
+            //self.imageView.alpha = 0
+        }
         showWatermarkOverlay()
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        imageView.image = filteredImage
+        UIView.animateWithDuration(0.4){
+            self.imageView2.alpha = 0
+            //self.imageView.alpha = 1
+        }
+        UIView.animateWithDuration(0.4){
+            self.imageView.image = self.filteredImage
+            //self.imageView2.alpha = 0
+            self.imageView.alpha = 1
+        }
         hideWatermarkOverlay()
     }
 
