@@ -27,6 +27,8 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet var watermarkView: UIView!
     
     var image = UIImage(named: "IMG_0974")
+    var iconImage = UIImage(named: "yosemite-meadows-1")
+    
     var filteredImage = UIImage()
     
     var filterState = FilterStates.None
@@ -106,6 +108,22 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         } else {
             showSecondaryMenu()
             sender.selected = true
+            
+            //
+            // setting the icon buttons
+            //
+            let redIcon = ImageProcessor.applyFilter(iconImage!, filterName: Filter.Redify, v: 15)
+            redBtn.setBackgroundImage(redIcon, forState: .Normal)
+            redBtn.setTitle("", forState: .Normal)
+            let blueIcon = ImageProcessor.applyFilter(iconImage!, filterName: Filter.Smurfify, v: 15)
+            blueBtn.setBackgroundImage(blueIcon, forState: .Normal)
+            blueBtn.setTitle("", forState: .Normal)
+            let greenIcon = ImageProcessor.applyFilter(iconImage!, filterName: Filter.Hulkify, v: 15)
+            greenBtn.setBackgroundImage(greenIcon, forState: .Normal)
+            greenBtn.setTitle("", forState: .Normal)
+            let yellowIcon = ImageProcessor.applyFilter(iconImage!, filterName: Filter.DoubleBright, v: 10)
+            yellowBtn.setBackgroundImage(yellowIcon, forState: .Normal)
+            yellowBtn.setTitle("", forState: .Normal)
         }
     }
     
